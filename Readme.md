@@ -3,8 +3,8 @@
 #### I got started by learning pygame and doing on my own
 
 #### Assets used :-
-Samelcust - https://github.com/samuelcust/flappy-bird-assets - graphical assets & sound effects <br>
-Komiku - https://www.chosic.com/download-audio/25106/ - background music :)
+Samelcust - [github page to the assets](https://github.com/samuelcust/flappy-bird-assets) - graphical assets & sound effects <br>
+Komiku - [background song is so cool](https://www.chosic.com/download-audio/24995/) - background music :)
 
 
 #### Some gameplay screenies
