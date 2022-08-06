@@ -1,4 +1,5 @@
-# This is my most successful project in 2022
+# This is my most successful and fastest project in 2022
+## Made in 2 days [ excluding night = 1 ]
 #### I got started by learning pygame and doing on my own
 
 #### Assets used :-
