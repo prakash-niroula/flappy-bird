@@ -164,6 +164,7 @@ class Bird(pygsprite):
 		self.once = False
 		self.score = 0
 		self.tmpsc = 0
+		self.hit = False
 		self.num = Numbers(numimg, numframes, 0, numcenter)
 
 		w, h = self.frames[0].get_size()
@@ -200,8 +201,8 @@ class Bird(pygsprite):
 		self.launchTime += 2
 		if self.launchTime > 10:
 			# COLLISION DETECTION OF GROUND GRRRRRRR
-			if self.img_rect.y+140 >= self.size[1]:
-				self.dead = True
+			if self.img_rect.y+135 >= self.size[1] and not self.dead:
+				self.die()
 				return True
 			# THEN BRING THE BIRD TO TOUCH THE GROUND
 			self.flapanimation = False
@@ -238,6 +239,16 @@ class Bird(pygsprite):
 			cord1[2] >= cord2[0] and cord1[0] <= cord2[2] and cord1[3] >= cord2[1] and cord1[1] <= cord2[3]
 		)
 		return a or False
+
+	def die(self):
+		if not self.hit:
+			self.hitsound.play()
+		self.to_update = False
+		for y in range(len(self.pipes)):
+			self.pipes[y].to_update = False
+			self.once = False
+		self.diesound.play()
+		self.dead = True
 
 	def update(self):	
 
@@ -281,6 +292,7 @@ class Bird(pygsprite):
 		tmpvar = False
 		for x in self.pipes:
 			if (self.collides(self.cords, x.cords[0]) or self.collides(self.cords, x.cords[1])) and self.take_input:
+				self.hit = True
 				self.hitsound.play()
 				for y in range(len(self.pipes)):
 					self.pipes[y].to_update = False
@@ -307,7 +319,8 @@ class Bird(pygsprite):
 				self.launch_up()
 			else:
 				# simple right ? NO LOOK THE CODE IN THE FUNCTIONS ;-;
-				if self.push_down(): return
+				if self.push_down():
+					return
 
 		# Me coding to animate the jump
 		# - Meanwhile the news reporter: The Sun has turned into a Red Giant
@@ -390,6 +403,7 @@ class Bird(pygsprite):
 		self.once = False
 		self.score = 0
 		self.tmpsc = 0
+		self.hit = False
 		for x in range(len(self.frames)):
 			self.frames[x] = self.original_frames[x]
 
